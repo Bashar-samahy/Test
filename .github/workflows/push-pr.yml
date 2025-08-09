@@ -1,0 +1,22 @@
+on: 
+    push:
+        branches:
+            - main
+            - "release/**"  #web hook for release branches
+        paths:
+                - "src/**"  #web hook for src folder changes
+    pull_request:
+        branches:
+            - main
+            - "release/**"  #web hook for release branches
+jobs: 
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v4.2.2
+
+            - name: run tests
+              run: |
+                npm install
+                npm test
